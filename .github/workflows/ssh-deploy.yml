@@ -9,7 +9,8 @@ on:
         description: 'Path to the app directory on the remote host'
       service_name:
         type: string
-        default: 'app'
+        required: true
+        description: 'Name of the docker service should be updated'
     secrets:
       DEPLOY_HOST:
         required: true
