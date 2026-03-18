@@ -1,0 +1,38 @@
+name: SSH Deploy
+
+on:
+  workflow_call:
+    inputs:
+      app_path:
+        type: string
+        required: true
+        description: 'Path to the app directory on the remote host'
+      service_name:
+        type: string
+        default: 'app'
+    secrets:
+      DEPLOY_HOST:
+        required: true
+      DEPLOY_USERNAME:
+        required: true
+      DEPLOY_KEY:
+        required: true
+      DEPLOY_PORT:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update docker image and restart
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+            cd ${{ inputs.app_path }}
+            docker compose down ${{ inputs.service_name }}
+            docker compose pull ${{ inputs.service_name }}
+            docker compose up -d ${{ inputs.service_name }}

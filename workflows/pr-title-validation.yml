@@ -1,0 +1,27 @@
+name: PR Title Validation
+
+on:
+  workflow_call:
+    inputs:
+      task_types:
+        type: string
+        default: '["feat","fix","docs","style","refactor","perf","test","build","ci","chore","revert"]'
+      custom_labels:
+        type: string
+        default: '{"feat": "feature", "fix": "fix", "docs": "documentation", "test": "test", "ci": "CI/CD", "refactor": "refactor", "perf": "performance", "chore": "chore", "revert": "revert", "wip": "WIP"}'
+
+jobs:
+  pr-title:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Conventional PR title
+        uses: ytanikin/pr-conventional-commits@1.5.1
+        with:
+          task_types: ${{ inputs.task_types }}
+          custom_labels: ${{ inputs.custom_labels }}
+          add_label: "true"
+
