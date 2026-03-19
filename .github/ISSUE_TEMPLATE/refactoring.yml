@@ -1,0 +1,57 @@
+name: "Refactoring"
+description: "Use for code improvements, restructuring, and technical debt"
+title: "[Refactor] "
+labels:
+  - "refactor"
+
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: Briefly describe what should be refactored and why
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current state
+      placeholder: Describe the current implementation and its issues (e.g., complexity, duplication, poor readability)
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed changes
+      placeholder: Describe how the code should be improved or restructured
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Expected benefits
+      placeholder: Explain the advantages (e.g., improved readability, performance, maintainability)
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and impact
+      placeholder: |
+        - Affected modules/files:
+        - Risk level:
+        - Breaking changes:
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra info
+      description: Additional context, benchmarks, or references
+    validations:
+      required: false
